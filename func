@@ -1,0 +1,51 @@
+import java.io.BufferedReader;
+import java.math.BigInteger;
+import java.util.*;
+import java.lang.String;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+
+
+public class Main {
+    public static BigInteger getMin(ArrayList<BigInteger> line){
+        BigInteger mn = new BigInteger(String.valueOf(line.get(0)));
+        for (BigInteger x: line){
+            if (x.compareTo(mn) == -1) mn = x;
+        }
+        return mn;
+    }
+    public static BigInteger getMax(ArrayList<BigInteger> line){
+        BigInteger mx = new BigInteger(String.valueOf(line.get(0)));
+        for (BigInteger x: line){
+            if (x.compareTo(mx) == 1) mx = x;
+        }
+        return mx;
+    }
+    public static BigInteger getSum(ArrayList<BigInteger> line){
+        BigInteger sum = BigInteger.ZERO;
+        for (BigInteger x: line){
+            sum = sum.add(x);
+        }
+        return sum;
+    }
+    public static BigInteger getMult(ArrayList<BigInteger> line){
+        BigInteger sum = BigInteger.ONE;
+        for (BigInteger x: line){
+            sum = sum.multiply(x);
+        }
+        return sum;
+    }
+    public static void main(String[] args) {
+        ArrayList<BigInteger> list_of_num = new ArrayList();
+        try (BufferedReader reader = Files.newBufferedReader(Paths.get("file.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] tmp = line.split(" ");    //Split space
+                for(String s: tmp) list_of_num.add(new BigInteger(s));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
